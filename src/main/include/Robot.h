@@ -17,6 +17,7 @@
 #include <iostream>
 
 #include "ctre/Phoenix.h"
+#include "SwerveModule.h"
 
 class Robot : public frc::TimedRobot {
  public:
@@ -46,10 +47,17 @@ class Robot : public frc::TimedRobot {
 
   double driveSpeed = .5;
 
-  WPI_TalonSRX frontright = {18};
-  WPI_TalonSRX frontleft = {15};
-  WPI_TalonSRX backright = {13};
-  WPI_TalonSRX backleft = {17};
+  frc::Translation2D m_frontLeftLocation{+0.381_m, +0.381_m};
+  frc::Translation2D m_frontRightLocation{+0.381_m, -0.381_m};
+  frc::Translation2D m_backLeftLocation{-0.381_m, +0.381_m};
+  frc::Translation2D m_backRightLocation{-0.381_m, -0.381_m};
+
+  SwerveModule m_frontLeft{ 1, 2, 3, 4, 5, 6};
+  SwerveModule m_frontRight{ 1, 2, 3, 4, 5, 6};
+  SwerveModule m_backLeft{ 1, 2, 3, 4, 5, 6};
+  SwerveModule m_backRight{ 1, 2, 3, 4, 5, 6};
+  
+  frc::SwerveDriveKinematics<4> m_kinematics{m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation};
 
   frc::MecanumDrive *m_robotDrive = new frc::MecanumDrive(frontleft, backleft, backright, frontright);
   frc::XboxController driver{0};
