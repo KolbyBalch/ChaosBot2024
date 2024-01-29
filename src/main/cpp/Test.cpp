@@ -11,12 +11,12 @@ void Robot::TestPeriodic() {
     targetSize = table->GetNumber("ta", 0.0);
 
     if (targetSize < 5 && targetSize > 1) {
-        m_robotDrive->DriveCartesian(
-            (0.5 * targetOffsetH / 27),
+        DriveAuto(
+            .15,
             0,
-            .15);
+            (0.5 * targetOffsetH / 27));
     } else {
-        m_robotDrive->DriveCartesian(
-            (0.5 * targetOffsetH / 27), 0, 0);
+        DriveAuto(
+            0, 0, (0.5 * targetOffsetH / 27));
     }
 }

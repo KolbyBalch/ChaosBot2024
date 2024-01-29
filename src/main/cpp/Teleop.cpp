@@ -8,18 +8,8 @@ void Robot::TeleopPeriodic() {
     targetOffsetH = table->GetNumber("tx", 0.0);
 
     if (driver.GetAButton() == true) {
-        nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("pipeline", 0);
-        nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("ledMode", 0);
-        m_robotDrive->DriveCartesian(
-            (0.5 * targetOffsetH / 27),
-            (driveSpeed * deadband(driver.GetLeftX())),
-            (-driveSpeed * deadband(driver.GetLeftY())));
+        DriveWithJoystick(true);
     } else {
-        nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("pipeline", 1);
-        nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("ledMode", 1);
-        m_robotDrive->DriveCartesian(
-            (driveSpeed * deadband(driver.GetRightX())), 
-            (driveSpeed * deadband(driver.GetLeftX())),
-            (-driveSpeed * deadband(driver.GetLeftY())));
+        DriveWithJoystick(false);
     }
 }

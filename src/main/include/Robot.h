@@ -6,10 +6,14 @@
 
 #include <string>
 
+#include <frc/MathUtil.h>
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
-#include <frc/drive/MecanumDrive.h>
+#include <frc/geometry/Translation2d.h>
+#include <frc/kinematics/SwerveDriveKinematics.h>
+#include <frc/kinematics/SwerveDriveOdometry.h>
 #include <frc/XboxController.h>
+#include <frc/filter/SlewRateLimiter.h>
 #include <frc/Timer.h>
 #include <cmath>
 #include <networktables/NetworkTable.h>
@@ -17,7 +21,7 @@
 #include <iostream>
 
 #include "ctre/Phoenix.h"
-#include "SwerveModule.h"
+#include "Drivetrain.h"
 
 class Robot : public frc::TimedRobot {
  public:
@@ -34,6 +38,9 @@ class Robot : public frc::TimedRobot {
   void SimulationInit() override;
   void SimulationPeriodic() override;
 
+  void DriveWithJoystick(bool fieldRelative);
+  void DriveAuto(float xSpeed, float ySpeed, float angularRotation);
+
  private:
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";
@@ -44,24 +51,15 @@ class Robot : public frc::TimedRobot {
   double targetOffsetH;
   double targetSize;
 
-
-  double driveSpeed = .5;
-
-  frc::Translation2D m_frontLeftLocation{+0.381_m, +0.381_m};
-  frc::Translation2D m_frontRightLocation{+0.381_m, -0.381_m};
-  frc::Translation2D m_backLeftLocation{-0.381_m, +0.381_m};
-  frc::Translation2D m_backRightLocation{-0.381_m, -0.381_m};
-
-  SwerveModule m_frontLeft{ 1, 2, 3, 4, 5, 6};
-  SwerveModule m_frontRight{ 1, 2, 3, 4, 5, 6};
-  SwerveModule m_backLeft{ 1, 2, 3, 4, 5, 6};
-  SwerveModule m_backRight{ 1, 2, 3, 4, 5, 6};
-  
-  frc::SwerveDriveKinematics<4> m_kinematics{m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation};
-
-  frc::MecanumDrive *m_robotDrive = new frc::MecanumDrive(frontleft, backleft, backright, frontright);
   frc::XboxController driver{0};
   frc::XboxController copilot{1};
+  Drivetrain m_swerve;
+
+  // Slew rate limiters to make joystick inputs more gentle; 1/3 sec from 0
+  // to 1.
+  frc::SlewRateLimiter<units::scalar> m_xspeedLimiter{3 / 1_s};
+  frc::SlewRateLimiter<units::scalar> m_yspeedLimiter{3 / 1_s};
+  frc::SlewRateLimiter<units::scalar> m_rotLimiter{3 / 1_s};
 
   double drivespeed = 0.5;
   float deadband(const float input) {
