@@ -8,7 +8,6 @@
  
 #include <frc/TimedRobot.h>
 #include <frc/smartdashboard/SendableChooser.h>
-#include <frc/drive/MecanumDrive.h>
 #include <frc/XboxController.h>
 #include <frc/Timer.h>
 #include <cmath>
@@ -16,11 +15,15 @@
 #include <networktables/NetworkTableInstance.h>
 #include <iostream>
 
+#include <pathplanner/lib/commands/PathPlannerAuto.h>
+
 #include "Subsystems/Drivetrain.h"
 #include "Subsystems/AmpDump.h"
 #include "Subsystems/Intake.h"
 #include "Subsystems/Shooter.h"
 #include "Subsystems/Climber.h"
+
+using namespace pathplanner;
 
 class Robot : public frc::TimedRobot {
  public:
@@ -42,6 +45,7 @@ class Robot : public frc::TimedRobot {
   const std::string kAutoNameDefault = "Default";
   const std::string followBot = "The Bot Follows";
   const std::string spinnyBoi = "He do a SPIEN";
+  std::shared_ptr<pathplanner::PathPlannerPath> path;
   std::string m_autoSelected;
   bool targetSeen;
   double targetOffsetH;

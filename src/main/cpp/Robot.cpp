@@ -8,7 +8,20 @@
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
+#include <pathplanner/lib/auto/NamedCommands.h>
+
+#include <memory>
+#include <functional>
+
+using namespace pathplanner;
+
+Robot::Robot() {
+  std::shared_ptr<Intake> intakePtr = std::function<void(double)> (m_Intake.Set(1));
+  NamedCommands::registerCommand("Intake on", );
+}
+
 void Robot::RobotInit() {
+
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(followBot, followBot);
   m_chooser.AddOption(spinnyBoi, spinnyBoi);
