@@ -42,15 +42,12 @@ class Robot : public frc::TimedRobot {
 
  private:
   frc::SendableChooser<std::string> m_chooser;
-  const std::string kAutoNameDefault = "Default";
-  const std::string followBot = "The Bot Follows";
-  const std::string spinnyBoi = "He do a SPIEN";
-  std::shared_ptr<pathplanner::PathPlannerPath> path;
+  const std::string kAutoNameDefault = "Test_Auto";
   std::string m_autoSelected;
   bool targetSeen;
   double targetOffsetH;
   double targetSize;
-
+  std::vector<std::shared_ptr<pathplanner::PathPlannerPath>> pathGroup;
   Drivetrain m_Drivetrain;
   AmpDump m_AmpDump;
   Intake m_Intake;

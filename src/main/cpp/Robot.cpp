@@ -15,16 +15,11 @@
 
 using namespace pathplanner;
 
-Robot::Robot() {
-  std::shared_ptr<Intake> intakePtr = std::function<void(double)> (m_Intake.Set(1));
-  NamedCommands::registerCommand("Intake on", );
-}
-
 void Robot::RobotInit() {
 
+  NamedCommands::registerCommand("Intake on", frc2::cmd::Run([&] { m_Intake.Set(1); }));
+
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
-  m_chooser.AddOption(followBot, followBot);
-  m_chooser.AddOption(spinnyBoi, spinnyBoi);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
   nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("pipeline", 0);
