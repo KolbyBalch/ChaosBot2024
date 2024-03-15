@@ -10,8 +10,8 @@
 
 void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
-  m_chooser.AddOption(followBot, followBot);
-  m_chooser.AddOption(spinnyBoi, spinnyBoi);
+  m_chooser.AddOption(leftAmp, leftAmp);
+  m_chooser.AddOption(rightAmp, rightAmp);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
   nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("pipeline", 0);

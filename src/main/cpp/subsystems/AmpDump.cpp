@@ -16,3 +16,11 @@ void AmpDump::Load() {};
 void AmpDump::Toggle() {
     m_solenoid.Toggle();
 };
+
+void AmpDump::Dump() {
+    m_solenoid.Set(frc::DoubleSolenoid::kForward);
+};
+
+void AmpDump::Reset() {
+    m_solenoid.Set(frc::DoubleSolenoid::kReverse);
+};

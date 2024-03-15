@@ -4,7 +4,7 @@
 using namespace ClimberConstants;
 
 Climber::Climber() :
-    m_climbingMotor{kClimberCANId, rev::CANSparkMax::MotorType::kBrushed}
+    m_climbingMotor{kClimberCANId, rev::CANSparkMax::MotorType::kBrushless}
     {};
 
 void Climber::setClimber(const double speed) {

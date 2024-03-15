@@ -11,6 +11,8 @@ class AmpDump {
 
         void Load();
         void Toggle();
+        void Dump();
+        void Reset();
     
     private:
         frc::DoubleSolenoid m_solenoid;

@@ -40,8 +40,8 @@ class Robot : public frc::TimedRobot {
  private:
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";
-  const std::string followBot = "The Bot Follows";
-  const std::string spinnyBoi = "He do a SPIEN";
+  const std::string leftAmp = "Left Amp";
+  const std::string rightAmp = "Right Amp";
   std::string m_autoSelected;
   bool targetSeen;
   double targetOffsetH;
@@ -53,6 +53,7 @@ class Robot : public frc::TimedRobot {
   Shooter m_Shooter;
   Climber m_Climber;
   
+  frc::Timer autoTimer;
 
   double driveSpeed = .5;
 

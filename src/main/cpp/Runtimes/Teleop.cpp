@@ -56,10 +56,13 @@ void Robot::TeleopPeriodic() {
     // SHOOTER CONTROLS
     if (copilot.GetBButton()) {
         m_Shooter.load();
+        m_Intake.Set(1);
     } else if (copilot.GetYButton()) {
         m_Shooter.shoot();
+        m_Intake.Set(1);
     } else {
         m_Shooter.zero();
+        m_Intake.Set(0);
     }
 
     // CLIMBER CONTROLS
