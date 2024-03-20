@@ -27,7 +27,7 @@
 namespace DriveConstants {
 // Driving Parameters - Note that these are not the maximum capable speeds of
 // the robot, rather the allowed maximum speeds
-constexpr units::meters_per_second_t kMaxSpeed = 4.8_mps;
+constexpr units::meters_per_second_t kMaxSpeed = 7.3_mps;
 constexpr units::radians_per_second_t kMaxAngularSpeed{2 * std::numbers::pi};
 
 constexpr double kDirectionSlewRate = 1.2;   // radians per second
@@ -77,7 +77,7 @@ constexpr units::meter_t kWheelCircumference =
 // 45 teeth on the wheel's bevel gear, 22 teeth on the first-stage spur gear, 15
 // teeth on the bevel pinion
 constexpr double kDrivingMotorReduction =
-    (45.0 * 22) / (kDrivingMotorPinionTeeth * 15);
+    6.75;
 constexpr double kDriveWheelFreeSpeedRps =
     (kDrivingMotorFreeSpeedRps * kWheelCircumference.value()) /
     kDrivingMotorReduction;
@@ -98,7 +98,7 @@ constexpr units::radian_t kTurningEncoderPositionPIDMinInput = 0_rad;
 constexpr units::radian_t kTurningEncoderPositionPIDMaxInput =
     units::radian_t{kTurningEncoderPositionFactor};
 
-constexpr double kDrivingP = 0.000004;
+constexpr double kDrivingP = 0.04;
 constexpr double kDrivingI = 0;
 constexpr double kDrivingD = 0;
 constexpr double kDrivingFF = (1 / kDriveWheelFreeSpeedRps);

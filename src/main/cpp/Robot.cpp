@@ -12,11 +12,12 @@ void Robot::RobotInit() {
   m_chooser.SetDefaultOption(kAutoNameDefault, kAutoNameDefault);
   m_chooser.AddOption(leftAmp, leftAmp);
   m_chooser.AddOption(rightAmp, rightAmp);
+  m_chooser.AddOption(leftSpeaker, leftSpeaker);
+  m_chooser.AddOption(rightSpeaker, rightSpeaker);
+  m_chooser.AddOption(centerSpeaker, centerSpeaker);
   frc::SmartDashboard::PutData("Auto Modes", &m_chooser);
 
-  nt::NetworkTableInstance::GetDefault().GetTable("limelight")->PutNumber("pipeline", 0);
-
-  m_AmpDump.Init();
+  m_Shooter.init();
 }
 void Robot::RobotPeriodic() {}
 

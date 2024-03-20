@@ -1,7 +1,7 @@
 #include "Subsystems/AmpDump.h"
 #include "Constants/SubsystemConstants.h"
 
-using namespace PneumaticsConstants;
+using namespace ShooterConstants;
 
 AmpDump::AmpDump() : m_solenoid{kPCMCanId, frc::PneumaticsModuleType::CTREPCM, kDumpForward, kDumpReverse},
     m_compressor{kPCMCanId, frc::PneumaticsModuleType::CTREPCM} {}

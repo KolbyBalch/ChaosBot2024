@@ -40,22 +40,25 @@ class Robot : public frc::TimedRobot {
  private:
   frc::SendableChooser<std::string> m_chooser;
   const std::string kAutoNameDefault = "Default";
-  const std::string leftAmp = "Left Amp";
-  const std::string rightAmp = "Right Amp";
+  const std::string leftAmp = "Blue Amp";
+  const std::string rightAmp = "Red Amp";
+  const std::string leftSpeaker = "Left Speaker";
+  const std::string rightSpeaker = "Right Speaker";
+  const std::string centerSpeaker = "Center Speaker";
   std::string m_autoSelected;
   bool targetSeen;
   double targetOffsetH;
   double targetSize;
 
   Drivetrain m_Drivetrain;
-  AmpDump m_AmpDump;
+  //AmpDump m_AmpDump;
   Intake m_Intake;
   Shooter m_Shooter;
   Climber m_Climber;
   
   frc::Timer autoTimer;
 
-  double driveSpeed = .5;
+  double driveSpeed = .7;
 
   frc::XboxController driver{0};
   frc::XboxController copilot{1};

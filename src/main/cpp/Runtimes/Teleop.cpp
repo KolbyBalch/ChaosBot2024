@@ -1,7 +1,8 @@
 #include "Robot.h"
 
 void Robot::TeleopInit() {
-    m_AmpDump.Init();
+    m_Shooter.init();
+    //m_AmpDump.Init();
 }
 
 void Robot::TeleopPeriodic() {
@@ -41,27 +42,31 @@ void Robot::TeleopPeriodic() {
         m_Drivetrain.ZeroHeading();
     }
 
-    // AMP DUMP CONTROLS
-    if (copilot.GetXButtonPressed()) {
-        m_AmpDump.Toggle();
-    }
-
     // INTAKE CONTROLS
     if (copilot.GetAButton()) {
         m_Intake.Set(1);
-    } else {
-        m_Intake.Set(0);
     }
 
     // SHOOTER CONTROLS
+    if (copilot.GetBButtonPressed()) {
+        m_Shooter.TimerStart();
+    }
+
     if (copilot.GetBButton()) {
         m_Shooter.load();
         m_Intake.Set(1);
     } else if (copilot.GetYButton()) {
         m_Shooter.shoot();
         m_Intake.Set(1);
+    } else if (copilot.GetStartButton()) {
+        m_Shooter.Set(0.1);
+    } else if (copilot.GetXButton()) {
+        m_Shooter.Set(-0.222);
     } else {
         m_Shooter.zero();
+    }
+
+    if (!copilot.GetAButton() && !copilot.GetBButton() && !copilot.GetYButton()) {
         m_Intake.Set(0);
     }
 

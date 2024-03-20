@@ -119,6 +119,7 @@ void MAXSwerveModule::SetDesiredState(
   frc::SmartDashboard::PutNumber(moduleLabel + "_desiredAngle", correctedDesiredState.angle.Radians().value() * (180 / M_PI));
   frc::SmartDashboard::PutNumber(moduleLabel + "_currentAngle", m_turningAbsoluteEncoder.GetPosition() * (180 / M_PI));
   frc::SmartDashboard::PutNumber(moduleLabel + "_optimizedAngle", optimizedDesiredState.angle.Radians().value() * (180 / M_PI));
+  frc::SmartDashboard::PutNumber(moduleLabel + "_driveSpeed", m_drivingEncoder.GetVelocity());
 
   // Command driving and turning SPARKS MAX towards their respective setpoints.
   m_drivingPIDController.SetReference((double)optimizedDesiredState.speed,
